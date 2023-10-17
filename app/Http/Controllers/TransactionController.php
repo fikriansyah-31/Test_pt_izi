@@ -17,43 +17,32 @@ class TransactionController extends Controller
             'amount' => 'required|numeric',
         ]);
 
-        // Lakukan logika Anda di sini, sesuai dengan pseudocode yang diberikan
 
-        // Contoh: menyimpan data transaksi ke dalam database
         $trxId = $request->input('trx_id');
         $amount = $request->input('amount');
 
-        // Simpan data transaksi ke dalam database
-        // Misalnya, Anda memiliki model Transaction yang sesuai
-        // Transaction::create(['trx_id' => $trxId, 'amount' => $amount]);
+    
         sleep(30);
 
-        // Berikan respons dengan data yang disimpan
         return response()->json([
             'trx_id' => $trxId,
             'amount' => $amount,
-        ], 201); // 201 adalah kode respons Created
+        ], 201); 
     }
 
     public function getTransactionData(Request $request)
     {
-        // Get all users
         $users = User::all();
         
-        // Initialize an array to store the data for each user
         $data = [];
         
-        // Iterate through each user
         foreach ($users as $user) {
-            // Get the user's balance
             $balance = Balance::where('user_id', $user->id)->first();
         
             
         
-    // Get the user's transactions
             $transactions = Transaction::where('user_id', $user->id)->get();
         
-            // Organize user and transaction data
             $userData = [
                 'user_id' => $user->id,
                 'user_name' => $user->name,
